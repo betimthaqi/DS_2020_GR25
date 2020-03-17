@@ -10,6 +10,7 @@ public class ds{
 		case "numerical":
 			switch(args[1]) {
 			case "encode":encode(args[2]);break;
+			case "decode":decode(args[2]);break;		
 		}
 		case "case":
 			switch(args[1]) {
@@ -34,18 +35,28 @@ public class ds{
 		}
 			
 	}
-		public static void encode(String plaintext) {
+		
+	public static void encode(String plaintext) {
 
 			plaintext=plaintext.toLowerCase();
 			plaintext=plaintext.replaceAll(" ", "");
 			
-			for(int i=0;i<plaintext.length();i++) 
-			{				
-				int number=(int)plaintext.charAt(i)-'a'+1;
-				System.out.print(number+" ");
-			}
-
+		for(int i=0;i<plaintext.length();i++) 
+		{	
+			int number=(int)plaintext.charAt(i)-'a'+1;
+			System.out.print(number+" ");
 		}
+	}
+	
+	public static void decode(String ciphertext) 
+	{
+			String[] nr = ciphertext.split(" ");
+		        for(String s:nr){
+			int a=Integer.parseInt(s);
+			char c=(char)(a+'a'-1);
+	          	System.out.print(c);
+		}
+}
 			
 			
 		
