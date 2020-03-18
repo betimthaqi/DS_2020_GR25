@@ -40,4 +40,20 @@ Komanda inverse, shkronjta e vogla i konverton ne te medha kurse shkronjat e med
 Komanda alternating konverton teksin ne njeren shkronje te vogel tjetren te madhe.
 ![enter image description here](https://images2.imagebam.com/2a/c8/6d/05ae6e1337455793.jpg)
 
+Komanda e trete ka te beje me algoritmin Vigenere per enkripim dhe dekriptim, gjithashtu edhe kjo komand ndahet ne dy nenkomanda
+ - Encrypt
+ - Decrypt
+
+Vigenere Cipher është një metodë e kriptimit të tekstit alfabetik. Përdor një formë të thjeshtë të zëvëndësimit polialfabetik.
+Lexo me shumë për Vigenere [këtu](https://www.braingle.com/brainteasers/codes/vigenere.php)
+Tabela përbëhet nga alfabete të shkruara 26 herë në rreshta të ndryshëm, secili alfabet në mënyrë ciklike zhvendoset në të majtë në krahasim me alfabetin e mëparshëm, që korrespondon me 26 shifrat e mundshme të Cezarit.
+Tabela e algoritmin Vigenere per enkriptim dhe dekriptim.
+![enter image description here](https://media.springernature.com/original/springer-static/image/chp:10.1007/978-3-030-16681-6_4/MediaObjects/477735_1_En_4_Fig2_HTML.png)
+ 
+Komanda encrypt bene enkriptimin e nje plaintexti permes nje çelesi dhe kthen ciphertextin.
+![enter image description here](https://images2.imagebam.com/33/ef/e7/75a88b1337458136.jpg)
+
+Komanda decrypt bene dekriptimin e nje ciphertexti permes nje çelesi dhe kthen plaintextin.
+![enter image description here](https://images2.imagebam.com/5a/5e/af/76888d1337458140.jpg)
+
 
