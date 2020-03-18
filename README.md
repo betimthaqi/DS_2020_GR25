@@ -27,14 +27,16 @@ Komanda e dyte case eshte e ndare ne pese nenkomanda te ndryshme:
 Komanda lowercase ben konvertimin e gjithe teksitit ne shkronja te vogla. 
 ![enter image description here](https://images2.imagebam.com/2f/e9/88/0bb36b1337455786.jpg)
 
-Komanda uppercase ben konvertimin e gjithe tekstit ne shkronja te medha. ![enter image description here](https://images2.imagebam.com/50/a2/df/7024001337455789.jpg)
+Komanda uppercase ben konvertimin e gjithe tekstit ne shkronja te medha.
+![enter image description here](https://images2.imagebam.com/50/a2/df/7024001337455789.jpg)
 
-Komanda capitalize konverton shkronjen e pare te secilen fjale ne shkronje te madhe. Shembull java ds case capitalize "takohemi neser" Takohemi Neser
+Komanda capitalize konverton shkronjen e pare te secilen fjale ne shkronje te madhe. 
 ![enter image description here](https://images2.imagebam.com/57/d4/68/62562d1337455795.jpg)
 
-Komanda inverse, shkronjta e vogla i konverton ne te medha kurse shkronjat e medha ne shkronja te vogla. ![enter image description here](https://images2.imagebam.com/92/86/32/d6ade41337455792.jpg)
+Komanda inverse, shkronjta e vogla i konverton ne te medha kurse shkronjat e medha ne shkronja te vogla.
+![enter image description here](https://images2.imagebam.com/92/86/32/d6ade41337455792.jpg)
 
-Komanda alternating konverton teksin ne njeren shkronje te vogel tjetren te madhe. Shembull java ds case alternating "takohemi" tAkOhEmI
+Komanda alternating konverton teksin ne njeren shkronje te vogel tjetren te madhe.
 ![enter image description here](https://images2.imagebam.com/2a/c8/6d/05ae6e1337455793.jpg)
 
 
