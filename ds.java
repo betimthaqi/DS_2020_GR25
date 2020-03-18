@@ -19,6 +19,7 @@ public class ds{
 			case "capitalize":capitalize(args[2]);break;
 			case "inverse":inverse(args[2]);break;
 			case "alternating":alternating(args[2]);break;
+			case "sentence":sentence(args[2]);break;
 			}
 		case "vigenere":
 			switch(args[1]) {
@@ -82,7 +83,7 @@ public class ds{
 		        lineScan.close();
 		    }
 		    
-		     public static void inverse(String str) {
+		   public static void inverse(String str) {
 			
 			  char[] charArray = str.toCharArray();
 		        
@@ -110,8 +111,23 @@ public class ds{
 		            System.out.print(sL.charAt(i));
 		        else
 		        System.out.print(sU.charAt(i));
+		    }}
+		        
+		    public static void sentence(String string) {
+		        char[] chars = string.toLowerCase().toCharArray();
+		        boolean found = false;
+		        for (int i = 0; i < chars.length; i++) {
+		            if (!found && Character.isLetter(chars[i])) {
+		                chars[i] = Character.toUpperCase(chars[i]);
+		                found = true;
+		            } else if (chars[i]=='.'|| chars[i]==',' || chars[i]=='\'' || chars[i]=='?' || chars[i]=='!') { 
+		            	// You can add other chars here
+		                found = false;
+		            }
+		        }
+		        System.out.println(String.valueOf(chars));
 		    }
-	}
+
 		    
 		    
 		    public static String cipherText(String key, String str) 
@@ -200,6 +216,5 @@ public class ds{
 			}
 
 }
-
 
 
