@@ -7,22 +7,18 @@ public class Vigenere{
 	public static String cipherText(String key, String str){ 
 		String cipher_text=""; 
 		for (int i = 0, j = 0 ; i < str.length() ; i++) { 
-			if(str.charAt(i) == ' ') {
-			    	cipher_text += " ";
-			    	continue;
-			 }
-                	if(!Character.isLetter(str.charAt(i))) {
-			    	cipher_text += str.charAt(i);
-			    	continue;
+			
+			if (str.charAt(i) == ' ' || !Character.isLetter(str.charAt(i))) {
+				cipher_text += str.charAt(i);
+				continue;
 			} 	    	
 			else if(str.charAt(i) >= 'a' && str.charAt(i) <= 'z'){
 
-			    	int x = (Character.toUpperCase(str.charAt(i)) + 
-			    				Character.toUpperCase(key.charAt(j))) % 26; 
+			    	int x = (Character.toUpperCase(str.charAt(i)) + Character.toUpperCase(key.charAt(j))) % 26; 
 				x += 'A'; 
 				cipher_text+=Character.toLowerCase((char)(x));
 				j++;
-			}
+			}// referenca --> https://www.geeksforgeeks.org/vigenere-cipher/
 			else if(str.charAt(i)>='A' && str.charAt(i)<='Z'){
 			        int x = (str.charAt(i) + Character.toUpperCase(key.charAt(j))) % 26 ;
 			        x += 'A'; 
@@ -37,14 +33,11 @@ public class Vigenere{
 		String orig_text = ""; 
 			  
 		for (int i = 0,j = 0 ; i < cipher_text.length() ; i++){ 
-			if(cipher_text.charAt(i) == ' ') {
-				orig_text += " ";
+			if (cipher_text.charAt(i) == ' ' || !Character.isLetter(cipher_text.charAt(i))) 
+			{
+				orig_text += cipher_text.charAt(i);
 				continue;
-			}
-            		if(!Character.isLetter(cipher_text.charAt(i))) {
-			    	orig_text += cipher_text.charAt(i);
-			    	continue;
-			}
+			}// referenca --> https://www.geeksforgeeks.org/vigenere-cipher/
 			else if(cipher_text.charAt(i) >= 'A' && cipher_text.charAt(i) <= 'Z') {
 			    int x = (cipher_text.charAt(i) -  Character.toUpperCase(key.charAt(j)) + 26) % 26; 
 			    x += 'A'; 
@@ -62,7 +55,9 @@ public class Vigenere{
 		}
 			return orig_text; 
 	}
-		    
+	
+	
+	// referenca --> https://www.geeksforgeeks.org/vigenere-cipher/	    
 	public static String generateKey(String str, String key) { 	  
 		for (int i = 0; ; i++) { 
 			if (key.length() == str.length()) 
