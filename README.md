@@ -15,7 +15,7 @@ Komanda e parë është e ndarë në dy nënkomanda:
 Komanda encode kthen secilen shkronjë të alfabetit në numer të pozites se saj në alfabet, psh. shkronja 'a' kthehet në numrin 1, shkronja 'b' kthehet në numrin 2 e keshtu me rradhë. 
 ![enter image description here](https://images2.imagebam.com/49/78/b1/6b52d11338202361.jpg)                                             
 
-Gjithashtu te enkodimi kemi të mundur edhe opsionin qe kur bëjmë kodimin e ndonjë fjalie hapesirat në fjali të zëvendësohen me qfarëdo karakteri që ju dëshironi.
+Gjithashtu te enkodimi kemi mundësi të zgjedhim opsionin "--separator" në mënyrë që kur të kodohet fjalia, hapësirat në fjali të zëvendësohen me karakterin që dëshirojmë.
 ![enter image description here](https://images2.imagebam.com/7b/d9/3b/c22dd31338202372.jpg)                                             
 
 Komanda decode kthen shifrat e dhëna në numra perkatës (bën të kundërtën e komandës encode). 
