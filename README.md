@@ -65,3 +65,11 @@ Komanda decrypt bënë dekriptimin e një ciphertexti përmes një çelësi dhe 
 
 Gjithashtu qoftëse ju gaboni në përdorim të programit tonë si psh jepni argumente jo valide, programi jone ju lajmeron dhe ju mund ti shenoni ato drejtë.
 ![enter image description here](https://images2.imagebam.com/ae/6c/9f/3202d31338202365.jpg)                                             
+
+## License & Copyright
+ © Betim Thaçi, Çlirim Hodaj, Drinos Kukaj.
+ University of Prishtina "Hasan Prishtina",
+ Department: Computer Engineering.
+ 
+ Licensed under the [MIT License](LICENSE).
+ 
