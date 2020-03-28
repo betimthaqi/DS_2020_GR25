@@ -1,20 +1,20 @@
 public class Numerical{
               
-	public Numerical(){
+    public Numerical(){
 		
-	};            
+    };            
 
     public static void encode(String plaintext) {
     	plaintext=plaintext.toLowerCase();
-		plaintext=plaintext.replaceAll(" ", "");
+	plaintext=plaintext.replaceAll(" ", "");
 			
-		for(int i = 0 ; i < plaintext.length() ; i++){				
-			int number=(int)plaintext.charAt(i)-'a'+1;
-			System.out.print(number+" ");
-			}
-	}
+	for(int i = 0 ; i < plaintext.length() ; i++){				
+		int number=(int)plaintext.charAt(i)-'a'+1;
+		System.out.print(number+" ");
+		}
+     }
 		 
-	public static void decode(String ciphertext) {
+    public static void decode(String ciphertext) {
 		String[] nr = ciphertext.split(" ");
 			
 		for(String s:nr) {
@@ -23,7 +23,7 @@ public class Numerical{
 		    
 			System.out.print(c);
 			}
-	}	
+    }	
 	      
     public static void separator(String sep, String string) {
 		String s = "";
