@@ -5,6 +5,28 @@
 ## Qëllimi
 Qëllimi i këtij projekti është që të krijohet një aplikacion lehtë i ekzekutueshëm dhe lehtë i përdorshëm me qëllim të ekriptimit dhe dekriptimit të fjalive të ndryshme me algoritme të caktuara.
 
+## Ekzekutimi dhe kompajllimi i programit
+
+ - Qe programi jone te ekzekutohet duhet qe te gjithe filet te jene ne nje folder.
+ - Programi jone mund te ekzekutohet nga Command Line ose Git Bash. Me me posht do te tregojm si ekzekutohet sipas Git Bash, plotesisht njejt shkon edhe me CommandLine.
+ - Fillimisht duhet ne Git Bash te çasemi ne folderin ku e kemi projektin, ne shembullin me poshte shihet qarte se si behet kjo.
+
+![enter image description
+here](https://images2.imagebam.com/df/39/84/e892f11338519796.jpg)
+
+
+ - Me ane te komandes javac ne bejme kompajllimin e programit tone te emeruar ds.java. 
+![enter image description here](https://images2.imagebam.com/66/0a/e7/d0e7c71338519799.jpg)
+
+
+ - Pas kesaj perves komandave java ds dhe argumenteve bejme thirrjen e kerkesave qe ploteson programi jone. 
+
+![enter image description
+here](https://images2.imagebam.com/00/bc/ad/bfa63b1338519801.jpg)
+
+
+Per te pare se qfare kerkesa ploteson programi jone klikoni ketu.
+
 ## Permbajtja
 Progami jonë permbanë tri komanda dhe secila komand është e ndarë në disa nënkomanda
 
