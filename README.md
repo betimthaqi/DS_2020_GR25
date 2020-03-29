@@ -8,9 +8,9 @@ Qëllimi i këtij projekti është që të krijohet një aplikacion lehtë i ekz
 
 ## Ekzekutimi dhe kompajllimi i programit
 
- - Që programi jonë  të  ekzekutohet duhet që të gjithë filet të jenë në një  folder të njejtë.
- - Programi jonë mund të ekzekutohet nga Command Line ose Git Bash. Ne do të tregojm si ekzekutohet sipas Git Bash, krejtësisht njejtë shkon edhe me CommandLine.
- - Fillimisht duhet në Git Bash te çasemi në folderin ku e kemi projektin, në shembullin më poshtë shihet qartë se si bëhet kjo.
+ - Që programi jonë  të  ekzekutohet duhet që të gjithë fajllat të jenë në një follder të njëjtë.
+ - Programi jonë mund të ekzekutohet nga Command Line ose Git Bash. Ne do të tregojmë si ekzekutohet sipas Git Bash, krejtësisht njëjtë shkon edhe me CommandLine.
+ - Fillimisht duhet që në Git Bash të çasemi në folderin ku e kemi projektin, në shembullin më poshtë shihet qartë se si bëhet kjo.
 
 > ![enter image description
 > here](https://images2.imagebam.com/df/39/84/e892f11338519796.jpg)
@@ -20,21 +20,21 @@ Qëllimi i këtij projekti është që të krijohet një aplikacion lehtë i ekz
 > ![enter image description
 > here](https://images2.imagebam.com/66/0a/e7/d0e7c71338519799.jpg)
 
- - Pas kësaj përmes komandave `java ds` dhe argumenteve bëjmë thirrjen e kërkesave që ploteson programi jonë. 
+ - Pas kësaj - përmes komandave `java ds` dhe argumenteve që pasojnë, programi ekzekuton ndonjërën prej komandave specifike. 
 
 > ![enter image description
 > here](https://images2.imagebam.com/00/bc/ad/bfa63b1338519801.jpg)
 
-Për të parë se qfarë kërkesa plotëson programi jonë klikoni shikojeni përmbajtjen.
+Për të parë se çfarë kërkesa plotëson programi jonë shikojeni përmbajtjen.
 
 ## Permbajtja
-Progami jonë permbanë tri komanda dhe secila komand është e ndarë në disa nënkomanda
+Progami jonë permbanë tri komanda dhe secila komandë është e ndarë në disa nënkomanda
 
 Komanda e parë është e ndarë në dy nënkomanda:
  - Encode
  - Decode
 
-Komanda encode kthen secilen shkronjë të alfabetit në numer të pozites se saj në alfabet, psh. shkronja 'a' kthehet në numrin 1, shkronja 'b' kthehet në numrin 2 e keshtu me rradhë. 
+Komanda encode kthen secilën shkronjë të alfabetit në numër të pozitës së saj në alfabet, psh. shkronja 'a' kthehet në numrin 1, shkronja 'b' kthehet në numrin 2 e kështu me radhë. 
 
 > ![enter image description
 > here](https://images2.imagebam.com/49/78/b1/6b52d11338202361.jpg)
@@ -57,7 +57,7 @@ Komanda decode kthen shifrat e dhëna në numra perkatës (bën të kundërtën 
 
                                              
 
-Komanda e dyte case është e ndarë në gjashtë nënkomanda të ndryshme:
+Komanda e dytë case është e ndarë në gjashtë nënkomanda të ndryshme:
  - Lowercase
  - Uppercase
  - Capitalize
@@ -65,12 +65,12 @@ Komanda e dyte case është e ndarë në gjashtë nënkomanda të ndryshme:
  - Alternating
  - Sentence
 
-Komanda lowercase bën konvertimin e gjithë teksitit në shkronja të vogla.                                                               
+Komanda lowercase bën konvertimin e tërë tekstit në shkronja të vogla.                                                               
 
 > ![enter image description
 > here](https://images2.imagebam.com/2e/c9/a6/0b9c001338202369.jpg)
 
-Komanda uppercase bën konvertimin e gjithë tekstit në shkronja të mëdha.                                                                 
+Komanda uppercase bën konvertimin e tërë tekstit në shkronja të mëdha.                                                                 
 
 > ![enter image description
 > here](https://images2.imagebam.com/8b/14/56/5042261338202374.jpg)
@@ -80,12 +80,12 @@ Komanda capitalize konverton shkronjën e parë të secilës fjalë në shkronj�
 > ![enter image description
 > here](https://images2.imagebam.com/ba/6c/67/6da21e1338202348.jpg)
 
-Komanda inverse, shkronjtat e vogla i konverton në shkronja të mëdha kurse shkronjat e medha në shkronja të vogla.                       
+Komanda inverse, shkronjtat e vogla i konverton në shkronja të mëdha kurse shkronjat e mëdha në shkronja të vogla.                       
 
 > ![enter image description
 > here](https://images2.imagebam.com/78/12/e1/4de12f1338202366.jpg)
 
-Komanda alternating konverton teksin në njerën shkronjë të vogël tjetrën të madhe.                                                       
+Komanda alternating konverton teksin e dhënë në një tekst ku njëra shkronjë është e vogël, e tjetra e madhe.                                                       
 
 > ![enter image description
 > here](https://images2.imagebam.com/d7/2d/05/3e3dc91338202344.jpg)
