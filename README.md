@@ -100,8 +100,7 @@ Komanda e tretë ka të bëjë me algoritmin Vigenere për enkripim dhe dekripti
  - Decrypt
 
 Vigenere Cipher është një metodë e kriptimit të tekstit alfabetik. Përdor një formë të thjeshtë të zëvëndësimit polialfabetik.
-Lexo me shumë për Vigenere [këtu] (https://www.braingle.com/brainteasers/codes/vigenere.php) </n>
-Tabela përbëhet nga alfabete të shkruara 26 herë në rreshta të ndryshëm, secili alfabet në mënyrë ciklike zhvendoset në të majtë në krahasim me alfabetin e mëparshëm, që korrespondon me 26 shifrat e mundshme të Cezarit. </n>
+Lexo me shumë për Vigenere [këtu](https://www.braingle.com/brainteasers/codes/vigenere.php) <br> Tabela përbëhet nga alfabete të shkruara 26 herë në rreshta të ndryshëm, secili alfabet në mënyrë ciklike zhvendoset në të majtë në krahasim me alfabetin e mëparshëm, që korrespondon me 26 shifrat e mundshme të Cezarit. </n>
 Tabela e algoritmin Vigenere per enkriptim dhe dekriptim.
 
 > ![enter image description
@@ -123,7 +122,5 @@ Gjithashtu qoftëse ju gaboni në përdorim të programit tonë si psh jepni arg
 > here](https://images2.imagebam.com/ae/6c/9f/3202d31338202365.jpg)
 
 ## License & Copyright
-© Betim Thaçi, Çlirim Hodaj, Drinos Kukaj.  </n>
-University of Prishtina "Hasan Prishtina",  </n>
-Department: Computer Engineering.    </n>
+© Betim Thaçi, Çlirim Hodaj, Drinos Kukaj.  <br> University of Prishtina "Hasan Prishtina",  <br> Department: Computer Engineering.    <br>
 Licensed under the [MIT License](LICENSE). 
