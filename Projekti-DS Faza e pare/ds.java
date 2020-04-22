@@ -61,6 +61,10 @@ public class ds {
                         				System.out.println("Argumenti i dyte duhet te bej pjese ne vargun {encrypt,decrypt}");
 					};
 						break;
+				case "create-user":
+				    rsa.krijocels(args[1]);break;
+			        case "delete-user":
+			            rsa.delete(args[1]);break;
 				default:
 					System.out.println("Argumente jovalide.Argumenti i pare duhet te bej pjese ne vargun {numerical,case,vigenere} ");
 			}
