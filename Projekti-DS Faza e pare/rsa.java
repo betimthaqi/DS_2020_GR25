@@ -224,47 +224,53 @@ public static void krijocels(String emrifajllit) throws UnsupportedEncodingExcep
 	}
 
 }
-public static void shfaqpub(String emrifajllit) {
-	if(new File(emrifajllit+".pub.xml").exists()) {
+public static String shfaqpub(String emrifajllit) {
+	String permbajtja="";
+	if(new File("keys/"+emrifajllit+".pub.xml").exists()) {
 		
 	System.out.println("Celsat:");
 	 
     Scanner lexo = null;
 	try {
-		lexo = new Scanner(new File(emrifajllit+".pub.xml"));
+		lexo = new Scanner(new File("keys/"+emrifajllit+".pub.xml"));
 	} catch (FileNotFoundException e1) {
 		// TODO Auto-generated catch block
 		e1.printStackTrace();
 	}
     while(lexo.hasNextLine()) {
-    	String permbajtja = lexo.nextLine();
-    	System.out.println(permbajtja);
+    	permbajtja += lexo.nextLine();
+    	permbajtja += "\n";
+    	//return permbajtja;
     }
 }
 	else
-		System.out.println("Gabim: Celesi publik '"+emrifajllit+"' nuk ekziston.");
+		permbajtja = "Gabim: Celesi publik '"+emrifajllit+"' nuk ekziston.";
+	return permbajtja;
 	}
 
 
-public static void shfaqpriv(String emrifajllit) {
-	if(new File(emrifajllit+".xml").exists()) {
+public static String shfaqpriv(String emrifajllit) {
+    String permbajtja="";
+	if(new File("keys/"+emrifajllit+".xml").exists()) {
 		
 	System.out.println("Celsat:");
 	 
     Scanner lexo = null;
 	try {
-		lexo = new Scanner(new File(emrifajllit+".xml"));
+		lexo = new Scanner(new File("keys/"+emrifajllit+".xml"));
 	} catch (FileNotFoundException e1) {
 		// TODO Auto-generated catch block
 		e1.printStackTrace();
 	}
     while(lexo.hasNextLine()) {
-    	String permbajtja = lexo.nextLine();
-    	System.out.println(permbajtja);
+    	permbajtja += lexo.nextLine();
+    	permbajtja += "\n";
     }
 }
 	else
-		System.out.println("Gabim: Celesi privat '"+emrifajllit+"' nuk ekziston.");
+		permbajtja = "Gabim: Celesi privat '"+emrifajllit+"' nuk ekziston.";
+	return permbajtja;
+
 	}
 
 public static void exportpriv(String sourcePath, String targetPath) {
