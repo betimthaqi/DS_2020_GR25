@@ -263,21 +263,27 @@ public static void exportpub(String sourcePath, String targetPath) {
 
 
 public static void delete(String emrifajllit) {
-	if(new File(emrifajllit+".xml").exists() && new File(emrifajllit+".pub.xml").exists()) {
+	if(new File("keys/"+emrifajllit+".xml").exists() && new File("keys/"+emrifajllit+".pub.xml").exists()) {
 	    
-    	if(new File(emrifajllit+".xml").delete() && new File(emrifajllit+".pub.xml").delete()) {
-    		System.out.println("Eshte larguar celesi privat '"+emrifajllit+".xml'");
-    		System.out.println("Eshte larguar celesi publik '"+emrifajllit+".pub.xml'");
+    	if(new File("keys/"+emrifajllit+".xml").delete() && new File("keys/"+emrifajllit+".pub.xml").delete()) {
+    		System.out.println("Eshte larguar celesi privat 'keys/"+emrifajllit+".xml'");
+    		System.out.println("Eshte larguar celesi publik 'keys/"+emrifajllit+".pub.xml'");
     	} else
         { 
             System.out.println("Failed to delete the file"); 
-        } 
-    	}
-	else if(new File(emrifajllit+".xml").exists()) {
-		System.out.println("Eshte larguar celesi privat '"+emrifajllit+".xml");
+        } 	
 	}
-	else if(new File(emrifajllit+".xml").exists()) {
-		System.out.println("Eshte larguar celesi publik '"+emrifajllit+".pub.xml");
+	else if(new File("keys/"+emrifajllit+".xml").exists()) {
+		if(new File("keys/"+emrifajllit+".xml").delete()) {
+			System.out.println("Eshte larguar celesi privat 'keys/"+emrifajllit+".xml");
+			}
+		else System.out.println("Deshtuam ta largojme celsin '"+emrifajllit+"'");
+	}
+	else if(new File("keys/"+emrifajllit+".pub.xml").exists()) {
+		if(new File("keys/"+emrifajllit+".pub.xml").delete()) {
+		System.out.println("Eshte larguar celesi publik 'keys/"+emrifajllit+".pub.xml");
+		}
+		else System.out.println("Deshtuam ta largojme celsin '"+emrifajllit+"'");
 	}
     else {
     	System.out.println("Celesi '"+emrifajllit+"' nuk ekziston");
