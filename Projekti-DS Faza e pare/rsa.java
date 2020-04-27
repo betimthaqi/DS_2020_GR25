@@ -241,16 +241,24 @@ public static void shfaqpriv(String emrifajllit) {
 		System.out.println("Gabim: Celesi privat '"+emrifajllit+"' nuk ekziston.");
 	}
 
-public static void moveFilepriv(String sourcePath, String targetPath) {
-    File fileToMove = new File(sourcePath+".xml");
-    fileToMove.renameTo(new File(targetPath));
-    System.out.println("Celesi privat u ruajt ne fajllin: "+targetPath);
+public static void exportpriv(String sourcePath, String targetPath) {
+	if (new File("keys/"+sourcePath+".xml").exists()) {
+		File fileToMove = new File("keys/"+sourcePath+".xml");
+	    fileToMove.renameTo(new File(targetPath));
+	    System.out.println("Celesi privat u ruajt ne fajllin: "+targetPath);
+	}
+	else 
+		System.out.println("Gabim: Celesi privat '"+sourcePath+"' nuk ekziston.");
 }
 
-public static void moveFilepub(String sourcePath, String targetPath) {
-    File fileToMove = new File(sourcePath+".pub.xml");
-    fileToMove.renameTo(new File(targetPath));
-    System.out.print("Celesi publik u ruajt ne fajllin: "+targetPath);
+public static void exportpub(String sourcePath, String targetPath) {
+	if (new File("keys/"+sourcePath+".pub.xml").exists()) {
+		File fileToMove = new File("keys/"+sourcePath+".pub.xml");
+	    fileToMove.renameTo(new File(targetPath));
+	    System.out.print("Celesi publik u ruajt ne fajllin: "+targetPath);
+	}
+	else 
+		System.out.println("Gabim: Celesi publik '"+sourcePath+"' nuk ekziston.");
 }
 
 
