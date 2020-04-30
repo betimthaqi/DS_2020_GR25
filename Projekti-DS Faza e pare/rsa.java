@@ -3,19 +3,24 @@ import java.math.BigInteger;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.nio.charset.StandardCharsets;
+import java.security.KeyFactory;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.NoSuchAlgorithmException;
+import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.interfaces.RSAPrivateCrtKey;
+import java.security.interfaces.RSAPublicKey;
+import java.security.spec.RSAPrivateKeySpec;
+import java.security.spec.RSAPublicKeySpec;
 import java.util.Base64;
 import java.util.Random;
 import java.util.Scanner;
 import javax.crypto.Cipher;
+import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
-import javax.crypto.SecretKeyFactory;
-import javax.crypto.spec.DESKeySpec;
+import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.SecretKeySpec;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -45,7 +50,7 @@ public static void importo(String kuimportohet,String ngaimportohet) throws SAXE
 	DocumentBuilder builder = factory.newDocumentBuilder();
 		
 		
-	if(new File("keys/"+kuimportohet+".xml").exists() || new File("keys/"+kuimportohet+".pub.xml").exists()){
+	if(new File("keys/"+kuimportohet+".xml").exists() && new File("keys/"+kuimportohet+".pub.xml").exists()){
             System.out.println("Gabim: Celesi "+kuimportohet+" ekziston paraprakisht.");			
 	}
 		
@@ -320,6 +325,160 @@ public static void delete(String emrifajllit) {
     else {
     	System.out.println("Celesi '"+emrifajllit+"' nuk ekziston");
     }
+}
+
+public static void writemessage(String emri,String teksti,String fajlli) throws Exception  {
+	// --> /https://www.codota.com/code/java/classes/java.security.spec.RSAPublicKeySpec
+	if (!new File("keys/"+emri+".pub.xml").exists()) {
+		System.out.println("Gabim: Celesi publik '"+emri+"' nuk ekziston.");
+	}
+	else {
+		Cipher c = Cipher.getInstance("DES/CBC/PKCS5Padding");
+		
+		KeyGenerator keygenerator = KeyGenerator.getInstance("DES");
+				
+		SecretKey key = keygenerator.generateKey();
+		
+		byte[] a = new byte[8];
+		new Random().nextBytes(a);
+		IvParameterSpec iv = new IvParameterSpec(a);
+		
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder builder = factory.newDocumentBuilder();
+		
+	    File xmlProductFile = new File("keys/" + emri + ".pub.xml");
+		
+		Document document = builder.parse(xmlProductFile);
+		
+		NodeList modulus = document.getElementsByTagName("Modulus");
+	    NodeList exponent = document.getElementsByTagName("Exponent");
+	    
+	    String permbajtjam = modulus.item(0).getTextContent();
+	    String permbajtjae = exponent.item(0).getTextContent();
+
+	    byte[] modBytes = Base64.getDecoder().decode(permbajtjam.getBytes());
+	    byte[] expBytes = Base64.getDecoder().decode(permbajtjae.getBytes());
+        
+	    BigInteger modules1 = new BigInteger(1,modBytes);
+	    BigInteger exponent1 = new BigInteger(1,expBytes);
+
+	    KeyFactory factory1 = KeyFactory.getInstance("RSA");
+	    Cipher cipher1 = Cipher.getInstance("RSA");
+	    
+	    RSAPublicKeySpec pubSpec = new RSAPublicKeySpec(modules1, exponent1);
+	    PublicKey pubKey = factory1.generatePublic(pubSpec);
+	    cipher1.init(Cipher.ENCRYPT_MODE, pubKey);
+	    
+	    byte[] encrypted = cipher1.doFinal(key.getEncoded());
+	    
+		String part1 = Base64.getEncoder().encodeToString(emri.getBytes("UTF-8"));
+		String part2 = Base64.getEncoder().encodeToString(a);
+	    String part3 = Base64.getEncoder().encodeToString(encrypted);
+		String part4 = desEncryption(teksti,key,iv,c);
+		
+	    String ciphertext = (part1+"."+part2+"."+part3+"."+part4);
+	    
+	    if (fajlli==null) {
+	    	System.out.println(ciphertext);
+		    }
+	    else {
+	    	File f = new File(fajlli);
+	    	PrintWriter shkruaj = new PrintWriter(f);
+	    	shkruaj.print(ciphertext);
+	    	shkruaj.close();
+	    	System.out.println("Mesazhi i enkriptuar u ruajt ne fajllin '"+fajlli+"'.");
+	    }		    
+	}	    
+}
+
+public static void readmessage(String ciphert_fajll) throws Exception {
+	
+	String permbajtja = "";
+	String part1 = "";
+	String part2 = "";
+	String part3 = "";
+	String part4 = "";
+	
+	Cipher c = Cipher.getInstance("DES/CBC/PKCS5Padding");
+	Scanner lexo = null;
+	if(ciphert_fajll.endsWith(".txt")) {
+		
+		File fajll = new File(ciphert_fajll);
+		lexo = new Scanner(fajll);
+		while(lexo.hasNext()) {
+	    	permbajtja += lexo.nextLine();
+	    	
+	    }
+		part1 = permbajtja.split("\\.")[0];
+		part2 = permbajtja.split("\\.")[1];
+		part3 = permbajtja.split("\\.")[2];
+		part4 = permbajtja.split("\\.")[3];
+	}
+	else {
+		part1 = ciphert_fajll.split("\\.")[0];
+		part2 = ciphert_fajll.split("\\.")[1];
+		part3 = ciphert_fajll.split("\\.")[2];
+		part4 = ciphert_fajll.split("\\.")[3];
+	}
+	
+	String emri = new String(Base64.getDecoder().decode(part1));
+	
+	if (!new File("keys/"+emri+".xml").exists()) {
+		System.out.println("Celesi privat 'keys/"+emri+".xml' nuk ekziston");
+	}
+	else {
+		byte[] i = Base64.getDecoder().decode(part2);
+		IvParameterSpec iv = new IvParameterSpec(i);
+				
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder builder = factory.newDocumentBuilder();
+		
+	    File xmlProductFile = new File("keys/" + emri + ".xml");
+		
+		Document document = builder.parse(xmlProductFile);
+			   
+		NodeList modulus = document.getElementsByTagName("Modulus");
+	    NodeList D = document.getElementsByTagName("D");
+	    String permbajtjam = modulus.item(0).getTextContent();
+	    String permbajtjad = D.item(0).getTextContent();
+	    
+	    byte[] modBytes = Base64.getDecoder().decode(permbajtjam);
+	    byte[] dBytes = Base64.getDecoder().decode(permbajtjad);
+	    
+	    BigInteger modules1 = new BigInteger(1, modBytes);
+	    BigInteger d = new BigInteger(1, dBytes);
+	   
+	    
+	    KeyFactory factory1 = KeyFactory.getInstance("RSA");
+	    Cipher cipher1 = Cipher.getInstance("RSA");
+   
+	    RSAPrivateKeySpec privSpec = new RSAPrivateKeySpec(modules1,d);
+	    PrivateKey privKey = factory1.generatePrivate(privSpec);
+	    cipher1.init(Cipher.DECRYPT_MODE, privKey);
+	    byte[] decryptedkey = cipher1.doFinal(Base64.getDecoder().decode(part3));
+	    SecretKey key = new SecretKeySpec(decryptedkey,"DES");
+	    String plaintext = desDecryption(part4,key,iv,c);
+	    
+	    System.out.println("Marresi: "+emri);
+		System.out.println("Mesazhi: "+plaintext);
+	}		
+	
+    
+}
+
+public static String desEncryption(String teksti,SecretKey key,IvParameterSpec iv,Cipher c) throws Exception
+{	     
+     c.init(Cipher.ENCRYPT_MODE, key,iv);
+     byte[] text = teksti.getBytes();
+     byte[] textEncrypted = c.doFinal(text);
+     return Base64.getEncoder().encodeToString(textEncrypted);
+}
+
+public static String desDecryption(String ciphertext,SecretKey key,IvParameterSpec iv,Cipher c)throws Exception
+{
+     c.init(Cipher.DECRYPT_MODE, key,iv);
+     byte[] textDecrypted = c.doFinal(Base64.getDecoder().decode(ciphertext));
+     return(new String(textDecrypted));
 }
 	
 }
