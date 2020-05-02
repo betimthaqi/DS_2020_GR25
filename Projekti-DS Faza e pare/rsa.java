@@ -335,7 +335,7 @@ public static void delete(String emrifajllit) {
 }
 
 public static void writemessage(String emri,String teksti,String fajlli) throws Exception  {
-	// --> /https://www.codota.com/code/java/classes/java.security.spec.RSAPublicKeySpec
+	
 	if (!new File("keys/"+emri+".pub.xml").exists()) {
 		System.out.println("Gabim: Celesi publik '"+emri+"' nuk ekziston.");
 	}
@@ -353,12 +353,12 @@ public static void writemessage(String emri,String teksti,String fajlli) throws 
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder builder = factory.newDocumentBuilder();
 		
-	    File xmlProductFile = new File("keys/" + emri + ".pub.xml");
+	        File xmlProductFile = new File("keys/" + emri + ".pub.xml");
 		
 		Document document = builder.parse(xmlProductFile);
 		
 		NodeList modulus = document.getElementsByTagName("Modulus");
-	    NodeList exponent = document.getElementsByTagName("Exponent");
+	        NodeList exponent = document.getElementsByTagName("Exponent");
 	    
 	    String permbajtjam = modulus.item(0).getTextContent();
 	    String permbajtjae = exponent.item(0).getTextContent();
@@ -380,7 +380,7 @@ public static void writemessage(String emri,String teksti,String fajlli) throws 
 	    
 		String part1 = Base64.getEncoder().encodeToString(emri.getBytes("UTF-8"));
 		String part2 = Base64.getEncoder().encodeToString(a);
-	    String part3 = Base64.getEncoder().encodeToString(encrypted);
+	        String part3 = Base64.getEncoder().encodeToString(encrypted);
 		String part4 = desEncryption(teksti,key,iv,c);
 		
 	    String ciphertext = (part1+"."+part2+"."+part3+"."+part4);
@@ -408,7 +408,7 @@ public static void readmessage(String ciphert_fajll) throws Exception {
 	
 	Cipher c = Cipher.getInstance("DES/CBC/PKCS5Padding");
 	Scanner lexo = null;
-	if(ciphert_fajll.endsWith(".txt")) {
+	if(new File(ciphert_fajll).exists()) {
 		
 		File fajll = new File(ciphert_fajll);
 		lexo = new Scanner(fajll);
@@ -444,7 +444,7 @@ public static void readmessage(String ciphert_fajll) throws Exception {
 		
 		Document document = builder.parse(xmlProductFile);
 			   
-		NodeList modulus = document.getElementsByTagName("Modulus");
+	    NodeList modulus = document.getElementsByTagName("Modulus");
 	    NodeList D = document.getElementsByTagName("D");
 	    String permbajtjam = modulus.item(0).getTextContent();
 	    String permbajtjad = D.item(0).getTextContent();
@@ -476,8 +476,7 @@ public static void readmessage(String ciphert_fajll) throws Exception {
 public static String desEncryption(String teksti,SecretKey key,IvParameterSpec iv,Cipher c) throws Exception
 {	     
      c.init(Cipher.ENCRYPT_MODE, key,iv);
-     byte[] text = teksti.getBytes();
-     byte[] textEncrypted = c.doFinal(text);
+     byte[] textEncrypted = c.doFinal(text.getBytes());
      return Base64.getEncoder().encodeToString(textEncrypted);
 }
 
