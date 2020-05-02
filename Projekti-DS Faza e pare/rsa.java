@@ -476,7 +476,7 @@ public static void readmessage(String ciphert_fajll) throws Exception {
 public static String desEncryption(String teksti,SecretKey key,IvParameterSpec iv,Cipher c) throws Exception
 {	     
      c.init(Cipher.ENCRYPT_MODE, key,iv);
-     byte[] textEncrypted = c.doFinal(text.getBytes());
+     byte[] textEncrypted = c.doFinal(teksti.getBytes());
      return Base64.getEncoder().encodeToString(textEncrypted);
 }
 
