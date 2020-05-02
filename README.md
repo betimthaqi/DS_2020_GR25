@@ -31,42 +31,42 @@ Për të parë se çfarë kërkesa plotëson programi jonë shikojeni përmbajtj
 Progami jonë mundëson të bëhen enkriptime dhe dektriptime sipas algoritmeve të ndryshme.
 Më poshtë do të shihni se qfarë komanda përmban programi jonë dhe sintaksa se si thirren ato përmes GitBash:<br>
 
-**Komanda Create-user**
+**Komanda Create-user** <br>
 Krijon një çift të publik/privat të RSA me emrat <name>.xml dhe <name>.pub.xml brenda direktoriumit të çelësave keys
 
 >     java ds create-user <name>
 > ![enter image description
 > here](https://images2.imagebam.com/6d/57/a5/41334f1342573265.png)
 
-**Komanda Delete-user**
+**Komanda Delete-user** <br>
 I largon të gjithë çelësat ekzistues të shfrytëzuesit. 
 
 >     java ds delete-user <name> 
 > ![enter image description
 > here](https://images2.imagebam.com/60/ea/a3/7b91081342573268.png)
 
-**Komanda Export-key**
+**Komanda Export-key** <br>
 Eksporton çelësin publik ose privat të shfrytëzuesit nga direktoriumi i çelësave
 
 >     java ds export-key <public|private> <name> [file] 
 > ![enter image description
 > here](https://images2.imagebam.com/d5/ca/f2/c251eb1342573271.png)
 
-**Komanda Import-key**
+**Komanda Import-key** <br>
 Importon çelësin publik ose privat të shfrytëzuesit nga shtegu i dhënë dhe e vendos në direktoriumin e çelësave. 
 
 >     java ds import-key <name> <path>
 > ![enter image description
 > here](https://images2.imagebam.com/bc/13/ff/b5fe141342573274.png)
 
-**Komanda Write-message**
+**Komanda Write-message** <br>
 E shkruan një mesazh të enkriptuar të dedikuar për një shfrytëzues. 
 
 >     java ds write-message <name> <message> [file]
 > ![enter image description
 > here](https://images2.imagebam.com/7e/f7/f1/c04b011342573278.png)
 
-**Komanda Read-message**
+**Komanda Read-message** <br>
 E dekripton dhe e shfaq në console mesazhin e enkriptuar. 
 
 >     java ds read-message <encrypted-message>
@@ -78,7 +78,7 @@ Gjithashtu programi jonë përmban edhe tri komanda tjera për enkriptime dhe de
 
 <br>
 
-**Komanda Numerical**
+**Komanda Numerical** <br>
  Është e ndarë në dy nënkomanda, encode dhe decode.
 
 Nënkomanda encode
@@ -89,7 +89,7 @@ Enkodon tekstin <text> në pozitat alfabetike të shkronjave.
 > ![enter image description
 > here](https://images2.imagebam.com/49/78/b1/6b52d11338202361.jpg)
 
-Nënkomanda decode 
+Nënkomanda decode
 Dekodon vargun < code> nga shifrat në shkronjat përkatëse.
 
 >     java ds numerical decode <code>
@@ -103,7 +103,7 @@ Gjithashtu te enkodimi kemi mundësi të zgjedhim opsionin "--separator" ku hap�
 > here](https://images2.imagebam.com/7b/d9/3b/c22dd31338202372.jpg)
 
  
-**Komanda Case**
+**Komanda Case** <br>
 E konverton tekstin < text> në madhësinë e dhënë < case>, e cila mund të jetë: lower, upper, capitalize, inverse, alternating.
 >     java ds case <case> <text>
 > ![enter image description
@@ -122,7 +122,7 @@ Nenkomanda sentence konverton secilën shkronjë të fjalisë e cila gjendet pas
 > ![enter image description
 > here](https://images2.imagebam.com/d0/e9/a9/b6793b1338203463.jpg)
 
-**Komanda Vigenere**
+**Komanda Vigenere** <br>
 Vigenère Cipher është version më i avancuar i Kodit të Cezarit pasi që përdor më shumë se një zhvendosjesiçelës. Lexo më shumë [ketu](https://www.braingle.com/brainteasers/codes/vigenere.php).
 Perbehet nga dy nenkomanda, encryp dhe decrypt
  
