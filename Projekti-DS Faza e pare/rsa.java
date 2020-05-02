@@ -178,7 +178,7 @@ public static void krijocels(String emrifajllit) throws UnsupportedEncodingExcep
     KeyPairGenerator keyPairGen = KeyPairGenerator.getInstance("RSA");
     KeyPair keyPair = keyPairGen.genKeyPair();
     RSAPrivateCrtKey privKey = (RSAPrivateCrtKey) keyPair.getPrivate();
-    //RSAPrivateCrtKey pubKey = (RSAPrivateCrtKey) keyPair.getPublic();
+    RSAPublicKey pubKey = (RSAPublicKey)keyPair.getPublic();
 
     BigInteger n = privKey.getModulus();
     BigInteger e = privKey.getPublicExponent();
@@ -189,9 +189,50 @@ public static void krijocels(String emrifajllit) throws UnsupportedEncodingExcep
     BigInteger dq = privKey.getPrimeExponentQ();
     BigInteger inverseQ = privKey.getCrtCoefficient(); 
     
-    BigInteger nP = n;
-    BigInteger eP = e;
+    BigInteger nP = pubKey.getModulus();
+    BigInteger eP = pubKey.getPublicExponent();
 
+    boolean krijimi = false;
+    
+    krijimi = krijopub(emrifajllit,nP,eP);
+    krijimi = krijopriv(emrifajllit,n,e,d,p,q,dp,dq,inverseQ);
+    
+    if (krijimi) {
+        System.out.println("Eshte krijuar celesi privat 'keys/"+emrifajllit+".xml'");
+        System.out.println("Eshte krijuar celesi publik 'keys/"+emrifajllit+".pub.xml'");
+    }
+    else {
+    	System.out.println("Gabim. Fajlli ekziston paraprakisht.");
+    }
+}
+
+public static boolean krijopub(String emrifajllit,BigInteger nP,BigInteger eP) throws UnsupportedEncodingException {
+    boolean krijimi = false;
+    StringBuilder builderPub = new StringBuilder();
+    builderPub.append("<RSAKeyValue>\n");
+    write(builderPub, "Modulus", nP);
+    write(builderPub, "Exponent", eP);
+    builderPub.append("</RSAKeyValue>");
+    
+    File fpub = new File("keys/"+emrifajllit+".pub.xml");
+    try {
+	if(fpub.createNewFile()) {
+		PrintWriter output = new PrintWriter(fpub);
+		output.print(builderPub);
+		output.close();
+		krijimi = true;
+	}
+	else {
+		krijimi = false;
+	}
+	} catch (IOException e1) {
+		e1.printStackTrace();
+	}
+    return krijimi;
+}
+
+public static boolean krijopriv(String emrifajllit,BigInteger n,BigInteger e,BigInteger d,BigInteger p,BigInteger q,BigInteger dp,BigInteger dq,BigInteger inverseQ) throws UnsupportedEncodingException {
+    boolean krijimi = false;
     StringBuilder builderPriv = new StringBuilder();
     builderPriv.append("<RSAKeyValue>\n");
     write(builderPriv, "Modulus", n);
@@ -204,31 +245,23 @@ public static void krijocels(String emrifajllit) throws UnsupportedEncodingExcep
     write(builderPriv, "D", d);
     builderPriv.append("</RSAKeyValue>");
     
-    StringBuilder builderPub = new StringBuilder();
-    builderPub.append("<RSAKeyValue>\n");
-    write(builderPub, "Modulus", nP);
-    write(builderPub, "Exponent", eP);
-    builderPub.append("</RSAKeyValue>");
-	
     File f= new File("keys/"+emrifajllit+".xml"); 
-    File fpub = new File("keys/"+emrifajllit+".pub.xml");
     try {
-		if(f.createNewFile() && fpub.createNewFile()) {
-			PrintWriter output = new PrintWriter(f);
-			PrintWriter outputp = new PrintWriter(fpub);
-			output.print(builderPriv);
-			outputp.print(builderPub);
-			output.close(); outputp.close();
-			System.out.println("Eshte krijuar celesi privat keys/"+emrifajllit+".xml");
-			System.out.println("Eshte krijuar celesi publik keys/"+emrifajllit+".pub.xml");
-		}
-		else System.out.println("Gabim. Fajlli ekziston paraprakisht.");
+	if(f.createNewFile()) {
+		PrintWriter output = new PrintWriter(f);
+		output.print(builderPriv);
+		output.close();
+		krijimi = true;
+	}
+	else {
+		krijimi = false;
+	}
 	} catch (IOException e1) {
-		// TODO Auto-generated catch block
 		e1.printStackTrace();
 	}
-
+    return krijimi;
 }
+	
 public static String shfaqpub(String emrifajllit) {
 	String permbajtja="";
 	if(new File("keys/"+emrifajllit+".pub.xml").exists()) {
