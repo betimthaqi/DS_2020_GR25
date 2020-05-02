@@ -44,21 +44,21 @@ try {
             default:System.out.println("Argumenti i dyte duhet te bej pjese ne vargun {encrypt,decrypt}");
 			};break;
 		case "create-user":
-		    rsa.krijocels(args[1]);break;
+		    LetsEncrypt.krijocels(args[1]);break;
 		case "delete-user":
-		    rsa.delete(args[1]);break;
+			LetsEncrypt.delete(args[1]);break;
 			case "export-key":
 				if(args.length==3) {
 					switch(args[1]) {
-					case "public":System.out.println(rsa.shfaqpub(args[2]));break;
-					case "private":System.out.println(rsa.shfaqpriv(args[2]));break;
+					case "public":System.out.println(LetsEncrypt.shfaqpub(args[2]));break;
+					case "private":System.out.println(LetsEncrypt.shfaqpriv(args[2]));break;
 					default:System.out.println("Gabim. Argumenti i dyte duhet te jete <public|private> ");
 					}
 				}
 				else if(args.length==4) {
 					switch(args[1]) {
-					case "public":rsa.exportpub(args[2],args[3]);break;
-					case "private":rsa.exportpriv(args[2],args[3]);break;
+					case "public":LetsEncrypt.exportpub(args[2],args[3]);break;
+					case "private":LetsEncrypt.exportpriv(args[2],args[3]);break;
 					default:System.out.println("Gabim. Argumenti i dyte duhet te jete <public|private> ");
 					}
 				}
@@ -66,15 +66,15 @@ try {
 				     System.out.println("Formati i kerkuar: java ds export-key <public|private> <name> [file/opsional]");
 				}break;
 		case "import-key":
-				rsa.importo(args[1], args[2]);break;
+				LetsEncrypt.importo(args[1], args[2]);break;
 		case "write-message":
 				if(args.length==3) {
-					rsa.writemessage(args[1], args[2],null);
+					LetsEncrypt.writemessage(args[1], args[2],null);
 				}else {
-					rsa.writemessage(args[1], args[2], args[3]);
+					LetsEncrypt.writemessage(args[1], args[2], args[3]);
 				}break;
 		case "read-message":
-				rsa.readmessage(args[1]);break;
+				LetsEncrypt.readmessage(args[1]);break;
 
 		default:{System.out.println("Argumente jovalide.Argumenti i pare duhet te bej pjese ne vargun {numerical,case,vigenere} ");}
 			
