@@ -45,7 +45,7 @@ import java.io.PrintWriter;
 public class rsa {
 
 public static void importo(String kuimportohet,String ngaimportohet) throws SAXException, IOException, ParserConfigurationException {
-		
+		                        
 	DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 	DocumentBuilder builder = factory.newDocumentBuilder();
 		
@@ -55,37 +55,45 @@ public static void importo(String kuimportohet,String ngaimportohet) throws SAXE
 	}
 		
 	else if(ngaimportohet.startsWith("http://")||ngaimportohet.startsWith("https://")) {
-		URL url; //referenca https://mkyong.com/java/how-to-get-url-content-in-java/
-
+		; 
 		try {
-			// get URL content
-			url = new URL(ngaimportohet);
-			URLConnection conn = url.openConnection();
 
-			// open the stream and put it into BufferedReader
-			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+		    URL website = new URL(ngaimportohet);
+		    URLConnection connection = website.openConnection();
+		    BufferedReader in = new BufferedReader(
+		                            new InputStreamReader(
+		                                connection.getInputStream()));
 
-			String inputLine;
+		    StringBuilder response = new StringBuilder();
+		    String inputLine;
 
-				
-			File file = new File("keys/"+kuimportohet+".pub.xml");
+		    while ((inputLine = in.readLine()) != null) {
+		        response.append(inputLine);
+                        response.append("\n");		        	
+		    }
 
-			if (!file.exists()) {
-				file.createNewFile();
+		    in.close();
+		    String permbajtja = response.toString();
+			File fpriv = new File("keys/"+kuimportohet+".xml");
+			PrintWriter shkruaj = new PrintWriter(fpriv);
+			shkruaj.print(permbajtja);
+			shkruaj.close();
+			if (permbajtja.contains("<D>")) {
+				Document document = builder.parse(fpriv);
+				NodeList modulus = document.getElementsByTagName("Modulus");
+				NodeList exponent = document.getElementsByTagName("Exponent");
+				String permbajtjam = modulus.item(0).getTextContent();
+				String permbajtjae = exponent.item(0).getTextContent();
+				BigInteger m = new BigInteger(Base64.getDecoder().decode(permbajtjam));
+				BigInteger e = new BigInteger(Base64.getDecoder().decode(permbajtjae));
+				krijopub(kuimportohet,m,e);
+				System.out.println("Celesi privat u ruajt ne fajllin 'keys/"+kuimportohet+".xml'.");
+				System.out.println("Celesi publik u ruajt ne fajllin 'keys/"+kuimportohet+".pub.xml'.");
 			}
-
-			//use FileWriter to write file
-			FileWriter fw = new FileWriter(file.getAbsoluteFile());
-			BufferedWriter bw = new BufferedWriter(fw);
-
-			while ((inputLine = br.readLine()) != null) {
-				bw.write(inputLine);
+			else {
+				fpriv.renameTo(new File("keys/"+kuimportohet+".pub.xml"));
+				System.out.println("Celesi publik u ruajt ne fajllin 'keys/"+kuimportohet+".pub.xml'.");
 			}
-
-			bw.close();
-			br.close();
-
-			System.out.println("Celesi publik u ruajt ne fajllin 'keys/"+kuimportohet+".pub.xml'.");
 
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
@@ -98,56 +106,23 @@ public static void importo(String kuimportohet,String ngaimportohet) throws SAXE
 			System.out.println("Gabim: Fajlli i dhene nuk eshte celes valid.");
 	}
 		
-	else {
+	else {         
 		File from = new File (ngaimportohet);
 		Document document = builder.parse(from);
 		Element rootElement = document.getDocumentElement();
 		if (rootElement.getChildNodes().getLength()>5) {
 				
-				
 			NodeList modulus = document.getElementsByTagName("Modulus");
 			NodeList exponent = document.getElementsByTagName("Exponent");
 			String permbajtjam = modulus.item(0).getTextContent();
 			String permbajtjae = exponent.item(0).getTextContent();
-			try {
-			    
-			DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
-			DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
-
-			// root elements
-			Document doc = docBuilder.newDocument();
-			Element rootElement1 = doc.createElement("RSAKeyValue");
-			doc.appendChild(rootElement1);
-
-			// child elements
-			Element firstname = doc.createElement("Modulus");
-			firstname.appendChild(doc.createTextNode(permbajtjam));
-			rootElement1.appendChild(firstname);
-
-				
-			Element lastname = doc.createElement("Exponent");
-			lastname.appendChild(doc.createTextNode(permbajtjae));
-			rootElement1.appendChild(lastname);
-				
-			// Transform XML Document to String and write the content into xml file 
-			TransformerFactory transformerFactory = TransformerFactory.newInstance();
-			Transformer transformer = transformerFactory.newTransformer();
-			DOMSource source = new DOMSource(doc);
-			StreamResult result = new StreamResult(new File("keys/"+kuimportohet+".pub.xml"));
-
-			transformer.transform(source, result);
-			   
-			}
-			catch (ParserConfigurationException pce) {
-				pce.printStackTrace();
-				} catch (TransformerException tfe) {
-				tfe.printStackTrace();
-				}
-				
-				
+			BigInteger m = new BigInteger(Base64.getDecoder().decode(permbajtjam));
+			BigInteger e = new BigInteger(Base64.getDecoder().decode(permbajtjae));
+			    			    
+			krijopub(kuimportohet,m,e);
 			from.renameTo(new File("keys/"+kuimportohet+".xml"));
-			System.out.println("Celesi publik u ruajt ne fajllin 'keys/"+kuimportohet+".xml'.");
 			System.out.println("Celesi publik u ruajt ne fajllin 'keys/"+kuimportohet+".pub.xml'.");
+			System.out.println("Celesi publik u ruajt ne fajllin 'keys/"+kuimportohet+".xml'.");
 				
 		}
 		else  {
@@ -155,7 +130,6 @@ public static void importo(String kuimportohet,String ngaimportohet) throws SAXE
 			System.out.println("Celesi publik u ruajt ne fajllin 'keys/"+kuimportohet+".pub.xml'.");
 		}
 	}
-		
 		
 }
 
