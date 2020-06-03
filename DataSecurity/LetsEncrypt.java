@@ -487,6 +487,63 @@ public static String desDecryption(String ciphertext,SecretKey key,IvParameterSp
      return(new String(textDecrypted));
 }
 	
+public static PublicKey rsapublik(String emri) throws Exception{
+	DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+	DocumentBuilder builder = factory.newDocumentBuilder();
+	
+    File xmlProductFile = new File("keys/" + emri + ".pub.xml");
+	
+	Document document = builder.parse(xmlProductFile);
+	
+	NodeList modulus = document.getElementsByTagName("Modulus");
+    NodeList exponent = document.getElementsByTagName("Exponent");
+    
+    String permbajtjam = modulus.item(0).getTextContent();
+    String permbajtjae = exponent.item(0).getTextContent();
+
+    byte[] modBytes = Base64.getDecoder().decode(permbajtjam.getBytes());
+    byte[] expBytes = Base64.getDecoder().decode(permbajtjae.getBytes());
+    
+    BigInteger modules1 = new BigInteger(1,modBytes);
+    BigInteger exponent1 = new BigInteger(1,expBytes);
+
+    KeyFactory factory1 = KeyFactory.getInstance("RSA");
+    
+    RSAPublicKeySpec pubSpec = new RSAPublicKeySpec(modules1, exponent1);
+    PublicKey pubKey = factory1.generatePublic(pubSpec);
+	
+	return pubKey;
+}
+
+public static PrivateKey rsaprivat(String emri) throws Exception{
+	
+	DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+	DocumentBuilder builder = factory.newDocumentBuilder();
+	
+    File xmlProductFile = new File("keys/" + emri + ".xml");
+	
+	Document document = builder.parse(xmlProductFile);
+		   
+	NodeList modulus = document.getElementsByTagName("Modulus");
+    NodeList D = document.getElementsByTagName("D");
+    String permbajtjam = modulus.item(0).getTextContent();
+    String permbajtjad = D.item(0).getTextContent();
+    
+    byte[] modBytes = Base64.getDecoder().decode(permbajtjam);
+    byte[] dBytes = Base64.getDecoder().decode(permbajtjad);
+    
+    BigInteger modules1 = new BigInteger(1, modBytes);
+    BigInteger d = new BigInteger(1, dBytes);
+    
+    KeyFactory factory1 = KeyFactory.getInstance("RSA");
+    
+    RSAPrivateKeySpec privSpec = new RSAPrivateKeySpec(modules1,d);
+    PrivateKey privKey = factory1.generatePrivate(privSpec);
+    
+	return privKey;
+	
+}
+	
 }
 
 
