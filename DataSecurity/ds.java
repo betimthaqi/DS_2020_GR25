@@ -68,11 +68,29 @@ try {
 		case "import-key":
 				LetsEncrypt.importo(args[1], args[2]);break;
 		case "write-message":
-				if(args.length==3) {
-					LetsEncrypt.writemessage(args[1], args[2],null);
+			if(args.length==3) {
+				rsa.writemessage(args[1], args[2],null,null);
+			}else if(args.length==4){
+				if(args[3].equals("--sender")) {
+					System.out.println("Pas opsionit '--sender' duhet te caktoni edhe tokenin ");
 				}else {
-					LetsEncrypt.writemessage(args[1], args[2], args[3]);
-				}break;
+					rsa.writemessage(args[1],args[2], args[3],null);
+				}				
+			}else if(args.length==5){
+				if(args[3].equals("--sender")) {
+					rsa.writemessage(args[1],args[2], null,args[4]);
+					}else {
+						System.out.println("Per te caktuar derguesin, komanda duhet te pranoje opsinonin '--sender <token>' ");
+					}
+				
+			}
+			else if(args.length==6) {
+				if(args[4].equals("--sender")) {
+				rsa.writemessage(args[1],args[2], args[3],args[5]);
+				}else {
+					System.out.println("Per te caktuar derguesin, komanda duhet te pranoje opsinonin '--sender <token>' ");
+				}
+			}break;
 		case "read-message":
 				LetsEncrypt.readmessage(args[1]);break;
 
