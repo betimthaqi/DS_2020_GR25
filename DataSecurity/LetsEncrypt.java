@@ -336,6 +336,7 @@ public static void delete(String emrifajllit) {
 
 public static void writemessage(String emri,String teksti,String fajlli) throws Exception  {
 	
+	// --> /https://www.codota.com/code/java/classes/java.security.spec.RSAPublicKeySpec
 	if (!new File("keys/"+emri+".pub.xml").exists()) {
 		System.out.println("Gabim: Celesi publik '"+emri+"' nuk ekziston.");
 	}
@@ -350,124 +351,153 @@ public static void writemessage(String emri,String teksti,String fajlli) throws 
 		new Random().nextBytes(a);
 		IvParameterSpec iv = new IvParameterSpec(a);
 		
-		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-		DocumentBuilder builder = factory.newDocumentBuilder();
-		
-	        File xmlProductFile = new File("keys/" + emri + ".pub.xml");
-		
-		Document document = builder.parse(xmlProductFile);
-		
-		NodeList modulus = document.getElementsByTagName("Modulus");
-	        NodeList exponent = document.getElementsByTagName("Exponent");
-	    
-	    String permbajtjam = modulus.item(0).getTextContent();
-	    String permbajtjae = exponent.item(0).getTextContent();
-
-	    byte[] modBytes = Base64.getDecoder().decode(permbajtjam.getBytes());
-	    byte[] expBytes = Base64.getDecoder().decode(permbajtjae.getBytes());
-        
-	    BigInteger modules1 = new BigInteger(1,modBytes);
-	    BigInteger exponent1 = new BigInteger(1,expBytes);
-
-	    KeyFactory factory1 = KeyFactory.getInstance("RSA");
 	    Cipher cipher1 = Cipher.getInstance("RSA");
-	    
-	    RSAPublicKeySpec pubSpec = new RSAPublicKeySpec(modules1, exponent1);
-	    PublicKey pubKey = factory1.generatePublic(pubSpec);
-	    cipher1.init(Cipher.ENCRYPT_MODE, pubKey);
+
+	    cipher1.init(Cipher.ENCRYPT_MODE, rsapublik(emri));
 	    
 	    byte[] encrypted = cipher1.doFinal(key.getEncoded());
 	    
 		String part1 = Base64.getEncoder().encodeToString(emri.getBytes("UTF-8"));
 		String part2 = Base64.getEncoder().encodeToString(a);
-	        String part3 = Base64.getEncoder().encodeToString(encrypted);
+	    String part3 = Base64.getEncoder().encodeToString(encrypted);
 		String part4 = desEncryption(teksti,key,iv,c);
-		
-	    String ciphertext = (part1+"."+part2+"."+part3+"."+part4);
-	    
-	    if (fajlli==null) {
-	    	System.out.println(ciphertext);
-		    }
-	    else {
+		String part5 = null;
+		String part6 = null;
+		String ciphertext = null;
+		String ciphertextjwt = null; 
+		if (token==null) {
+			ciphertext = (part1+"."+part2+"."+part3+"."+part4);
+		}
+		if(token!=null) {
+			part5=Base64.getEncoder().encodeToString(Token.return_sender(token).getBytes("UTF-8"));
+			try {
+				part6=Base64.getEncoder().encodeToString(signature.nenshkrimi(part4,Token.return_sender(token)));
+				ciphertextjwt = (part1+"."+part2+"."+part3+"."+part4+"."+part5+"."+part6);
+			}
+			catch(Exception e) {
+				System.out.println("Komanda deshtoi sepse tokeni nuk eshte valid");
+			}
+
+		}
+		if (fajlli==null) {
+			if(token==null) {
+				System.out.println(ciphertext);
+			}
+			else if(token!=null) {
+				if(ciphertextjwt!=null) {
+					System.out.println(ciphertextjwt);
+				}
+				
+			}
+		}
+	    else if(fajlli!=null) {
 	    	File f = new File(fajlli);
 	    	PrintWriter shkruaj = new PrintWriter(f);
-	    	shkruaj.print(ciphertext);
+	    	if(token==null) {
+	    		shkruaj.print(ciphertext);
+	    	}
+	    	else if(token!=null) {
+	    		shkruaj.print(ciphertextjwt);
+	    	}
 	    	shkruaj.close();
 	    	System.out.println("Mesazhi i enkriptuar u ruajt ne fajllin '"+fajlli+"'.");
-	    }		    
+	    }
+	    
 	}	    
+
 }
 
 public static void readmessage(String ciphert_fajll) throws Exception {
+	
+	
 	
 	String permbajtja = "";
 	String part1 = "";
 	String part2 = "";
 	String part3 = "";
 	String part4 = "";
+	String part5 = null;
+	String part6 = null;
 	
 	Cipher c = Cipher.getInstance("DES/CBC/PKCS5Padding");
 	Scanner lexo = null;
 	if(new File(ciphert_fajll).exists()) {
-		
+
 		File fajll = new File(ciphert_fajll);
 		lexo = new Scanner(fajll);
 		while(lexo.hasNext()) {
-	    	permbajtja += lexo.nextLine();
-	    	
-	    }
-		part1 = permbajtja.split("\\.")[0];
-		part2 = permbajtja.split("\\.")[1];
-		part3 = permbajtja.split("\\.")[2];
-		part4 = permbajtja.split("\\.")[3];
+			permbajtja += lexo.nextLine();
+
+		}
+		String[] fajllcipher = permbajtja.split("\\.");
+		part1 = fajllcipher[0];
+		part2 = fajllcipher[1];
+		part3 = fajllcipher[2];
+		part4 = fajllcipher[3];
+		
+		if(fajllcipher.length==6) {
+			part5 = fajllcipher[4];
+			part6 = fajllcipher[5];
+		}
+
 	}
 	else {
-		part1 = ciphert_fajll.split("\\.")[0];
-		part2 = ciphert_fajll.split("\\.")[1];
-		part3 = ciphert_fajll.split("\\.")[2];
-		part4 = ciphert_fajll.split("\\.")[3];
+		String[] ciphertext = ciphert_fajll.split("\\."); 
+		part1 = ciphertext[0];
+		part2 = ciphertext[1];
+		part3 = ciphertext[2];
+		part4 = ciphertext[3];
+
+		if(ciphertext.length==6){
+			part5 = ciphertext[4];
+			part6 = ciphertext[5];
+		}
+
 	}
-	
+
 	String emri = new String(Base64.getDecoder().decode(part1));
-	
+	String sender = null;
 	if (!new File("keys/"+emri+".xml").exists()) {
 		System.out.println("Celesi privat 'keys/"+emri+".xml' nuk ekziston");
 	}
 	else {
 		byte[] i = Base64.getDecoder().decode(part2);
 		IvParameterSpec iv = new IvParameterSpec(i);
-				
-		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-		DocumentBuilder builder = factory.newDocumentBuilder();
-		
-	    File xmlProductFile = new File("keys/" + emri + ".xml");
-		
-		Document document = builder.parse(xmlProductFile);
-			   
-	    NodeList modulus = document.getElementsByTagName("Modulus");
-	    NodeList D = document.getElementsByTagName("D");
-	    String permbajtjam = modulus.item(0).getTextContent();
-	    String permbajtjad = D.item(0).getTextContent();
-	    
-	    byte[] modBytes = Base64.getDecoder().decode(permbajtjam);
-	    byte[] dBytes = Base64.getDecoder().decode(permbajtjad);
-	    
-	    BigInteger modules1 = new BigInteger(1, modBytes);
-	    BigInteger d = new BigInteger(1, dBytes);
-	   
-	    
-	    KeyFactory factory1 = KeyFactory.getInstance("RSA");
-	    Cipher cipher1 = Cipher.getInstance("RSA");
-   
-	    RSAPrivateKeySpec privSpec = new RSAPrivateKeySpec(modules1,d);
-	    PrivateKey privKey = factory1.generatePrivate(privSpec);
-	    cipher1.init(Cipher.DECRYPT_MODE, privKey);
-	    byte[] decryptedkey = cipher1.doFinal(Base64.getDecoder().decode(part3));
-	    SecretKey key = new SecretKeySpec(decryptedkey,"DES");
-	    String plaintext = desDecryption(part4,key,iv,c);
-	    
+
+
+		Cipher cipher1 = Cipher.getInstance("RSA");
+
+		cipher1.init(Cipher.DECRYPT_MODE, rsaprivat(emri));
+		byte[] decryptedkey = cipher1.doFinal(Base64.getDecoder().decode(part3));
+		SecretKey key = new SecretKeySpec(decryptedkey,"DES");
+		String plaintext = desDecryption(part4,key,iv,c);
+		boolean verifiko = false;
+	    if(part5 != null && part6 != null) {
+	    	sender = new String (Base64.getDecoder().decode(part5));try {
+	    	verifiko = signature.verifikimi(Base64.getDecoder().decode(part6.getBytes()),sender,part4);
+	    }
+	    	catch(Exception e) {
+	    		}
+	    	}
 	    System.out.println("Marresi: "+emri);
 		System.out.println("Mesazhi: "+plaintext);
+		if(part5 != null && part6 != null) {
+			System.out.println("Derguesi: "+sender);
+			boolean senderfajll = new File("keys/"+sender+".pub.xml").exists();
+			if(senderfajll==false) {
+				System.out.println("Nenshkrimi: mungon celesi publik '"+sender+"'");
+			}
+			else if(verifiko && senderfajll) {
+				System.out.println("Nenshkrimi: valid");
+			}
+			else  {
+				System.out.println("Nenshkrimi: jovalid");
+			}
+		}
+		
+			
+		
+		
 	}		
 	
     
