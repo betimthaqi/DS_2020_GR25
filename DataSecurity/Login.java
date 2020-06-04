@@ -12,7 +12,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 
-public class login {
+public class Login {
     public static final int iterations = 20*1000;
     public static final int saltLen = 32;
     public static final int desiredKeyLen = 256;
@@ -50,7 +50,7 @@ public static String getSaltedHash(String password) throws Exception {
     }
 
 	 public static void login(String emri) throws Exception {
-    	//clirim--> fiek123,,,  projekti--> f12345  ,, unipr--> fk1111
+    	
     			Scanner input = new Scanner(System.in);
     			HashMap<String, String> db = new HashMap<String, String>();
 
