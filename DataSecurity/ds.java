@@ -46,7 +46,9 @@ try {
 		case "create-user":
 		    LetsEncrypt.krijocels(args[1]);break;
 		case "delete-user":
-			LetsEncrypt.delete(args[1]);break;
+			{LetsEncrypt.delete(args[1]);Login.deleteuser(args[1]);}break;
+		case "login":
+		    Login.login(args[1]);break;
 			case "export-key":
 				if(args.length==3) {
 					switch(args[1]) {
