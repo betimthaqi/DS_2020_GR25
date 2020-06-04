@@ -166,17 +166,31 @@ public static void krijocels(String emrifajllit) throws UnsupportedEncodingExcep
     BigInteger nP = pubKey.getModulus();
     BigInteger eP = pubKey.getPublicExponent();
 
-    boolean krijimi = false;
+    String create_user = "";
+
+    boolean krijimipub = false;
+    boolean krijimipriv = false;
     
-    krijimi = krijopub(emrifajllit,nP,eP);
-    krijimi = krijopriv(emrifajllit,n,e,d,p,q,dp,dq,inverseQ);
+    boolean ekziston = exist(emrifajllit);
     
-    if (krijimi) {
-        System.out.println("Eshte krijuar celesi privat 'keys/"+emrifajllit+".xml'");
-        System.out.println("Eshte krijuar celesi publik 'keys/"+emrifajllit+".pub.xml'");
-    }
-    else {
+    if(ekziston==true) {
     	System.out.println("Gabim. Fajlli ekziston paraprakisht.");
+    }else {    
+        create_user = Login.krijouser(emrifajllit); 
+    }
+
+    if (ekziston == false && create_user.startsWith("Eshte krijuar")) {
+    	System.out.println(create_user);
+    	krijimipub = krijopub(emrifajllit,nP,eP);
+        krijimipriv = krijopriv(emrifajllit,n,e,d,p,q,dp,dq,inverseQ);
+        if (krijimipub && krijimipriv) {
+        	System.out.println("Eshte krijuar celesi privat 'keys/"+emrifajllit+".pub.xml'");
+            System.out.println("Eshte krijuar celesi publik 'keys/"+emrifajllit+".xml'");
+        }
+        
+    }
+    else if(!create_user.equals("")) {
+    	System.out.println(create_user);
     }
 }
 
