@@ -28,8 +28,8 @@ try {
 			case "capitalize":Case.capitalize(args[2]);break;
 			case "inverse":Case.inverse(args[2]);break;
 			case "alternating":Case.alternating(args[2]);break;
-            case "sentence":Case.sentence(args[2]);break;
-            default:System.out.println("Argumenti i dyte duhet te bej pjese ne vargun {lower,upper,capitalize,inverse,alternating,sentence}");
+                        case "sentence":Case.sentence(args[2]);break;
+                        default:System.out.println("Argumenti i dyte duhet te bej pjese ne vargun {lower,upper,capitalize,inverse,alternating,sentence}");
 			};break;
 		case "vigenere":
 			switch(args[1]) {
@@ -41,7 +41,7 @@ try {
 				String key= Vigenere.generateKey(args[3],args[2]);
 				System.out.println(Vigenere.originalText(key,args[3]));
 			};break; 
-            default:System.out.println("Argumenti i dyte duhet te bej pjese ne vargun {encrypt,decrypt}");
+                        default:System.out.println("Argumenti i dyte duhet te bej pjese ne vargun {encrypt,decrypt}");
 			};break;
 		case "create-user":
 		    LetsEncrypt.krijocels(args[1]);break;
@@ -65,7 +65,7 @@ try {
 					}
 				}
 				else{
-				     System.out.println("Formati i kerkuar: java ds export-key <public|private> <name> [file/opsional]");
+				     System.out.println("Formati i kerkuar: export-key <public|private> <name> [file/opsional]");
 				}break;
 		case "import-key":
 				LetsEncrypt.importo(args[1], args[2]);break;
@@ -92,11 +92,14 @@ try {
 				}else {
 					System.out.println("Per te caktuar derguesin, komanda duhet te pranoje opsinonin '--sender <token>' ");
 				}
+			}
+			else {
+			     System.out.println("Formati i kerkuar: write-message <name> <message> [file] [--sender <token>]")
 			}break;
 		case "read-message":
 				LetsEncrypt.readmessage(args[1]);break;
 
-		default:{System.out.println("Argumente jovalide.Argumenti i pare duhet te bej pjese ne vargun {numerical,case,vigenere} ");}
+		default:{System.out.println("Argumente jovalide.Argumenti i pare duhet te bej pjese ne vargun { numerical, case, vigenere, create-user, delete-user, export-key, import-key, login, status, write-message, read-message} ");}
 			
 			
 		}
