@@ -21,12 +21,10 @@ public class Login {
 
 public static String getSaltedHash(String password) throws Exception {
         byte[] salt = SecureRandom.getInstance("SHA1PRNG").generateSeed(saltLen);
-        // store the salt with the password
         return Base64.getEncoder().encodeToString(salt) + "$" + hash(password, salt);
     }
 
-    /** Checks whether given plaintext password corresponds
-     to a stored salted hash of the password. */
+    
     public static boolean check(String password, String stored) throws Exception{
         String[] saltAndHash = stored.split("\\$");
         if (saltAndHash.length != 2) {
@@ -58,9 +56,7 @@ public static String getSaltedHash(String password) throws Exception {
     	        System.out.println("Passwordi:");
     	        String pass = input.nextLine();
     	        input.close();
-    	       // boolean verifiko=false;
     	        Scanner lexo = new Scanner(new File("login.txt"));
-    	        //String permbajtja = "";
     	        while(lexo.hasNextLine()) {
     	        	String[] str = lexo.nextLine().split(" ");
     	        	String key = str[0];
