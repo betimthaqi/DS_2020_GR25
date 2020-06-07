@@ -11,7 +11,7 @@ Qëllimi i këtij projekti është që të krijohet një aplikacion lehtë i ekz
  - Që programi jonë  të  ekzekutohet duhet që të shkarkoni atë përmes butonit download si dhe të gjithë fajllat të jenë në një follder të njëjtë.
  ![enter image description here](https://images2.imagebam.com/fe/63/60/cee4aa1346101316.png)
  - Programi jonë mund të ekzekutohet nga Command Line ose GitBash nese e keni te instaluar (qofse deshironi ta instaloni klikoni [ketu](https://git-scm.com/downloads)). Në do të tregojmë si ekzekutohet sipas GitBash, krejtësisht njëjtë shkon pocedura edhe me CommandLine.
- -Pasi që projekti e metodat për implementimin e JWT (Json Web Token) janë krijuar përmes Maven Project është përdorur vegla Maven për agregimin (mbledhjen) e tërë programit me të gjitha libraritë (dependecies) në një fajll të vetëm (DS.jar).
+ - Pasi që projekti e metodat për implementimin e JWT (Json Web Token) janë krijuar përmes Maven Project është përdorur vegla Maven për agregimin (mbledhjen) e tërë programit me të gjitha libraritë (dependecies) në një fajll të vetëm (DS.jar).
  - Fillimisht duhet që në Git Bash të çasemi në follderin ku e kemi të ruajtur fajllin "DS.jar", në shembullin e mëposhtëm shihet qartë se si bëhet kjo.
  
 
