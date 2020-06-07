@@ -8,22 +8,18 @@ Qëllimi i këtij projekti është që të krijohet një aplikacion lehtë i ekz
 
 ## Ekzekutimi dhe kompajllimi i programit
 
- - Që programi jonë  të  ekzekutohet duhet që të gjithë fajllat të jenë në një follder të njëjtë.
+ - Që programi jonë  të  ekzekutohet duhet që të shkarkoni atë përmes butonit download si dhe të gjithë fajllat të jenë në një follder të njëjtë.
+ ![enter image description here](https://images2.imagebam.com/fe/63/60/cee4aa1346101316.png)
  - Programi jonë mund të ekzekutohet nga Command Line ose GitBash nese e keni te instaluar (qofse deshironi ta instaloni klikoni [ketu](https://git-scm.com/downloads)). Në do të tregojmë si ekzekutohet sipas GitBash, krejtësisht njëjtë shkon pocedura edhe me CommandLine.
  - Fillimisht duhet që në Git Bash të çasemi në folderin ku e kemi projektin, në shembullin më poshtë shihet qartë se si bëhet kjo.
 
 > ![enter image description
-> here](https://images2.imagebam.com/b0/06/0b/ae483b1342573259.png)
+> here](https://images2.imagebam.com/7c/ed/3f/e888fa1346101318.png)
 
- - Me anë të komandës `javac` ne bëjmë kompajllimin e programit tonë të emëruar ds.java. 
-
-> ![enter image description
-> here](https://images2.imagebam.com/07/46/89/2181cd1342573261.png)
-
- - Pas kësaj - përmes komandave `java ds` dhe argumenteve që pasojnë, programi ekzekuton ndonjërën prej komandave specifike. 
+ - Pas kësaj - përmes komandave `java -jar` thirret programi DS.jar dhe pastaj argumentet që pasojnë sipas kerkesave, programi ekzekuton ndonjërën prej komandave specifike. Shih figurën më poshtë.
 
 > ![enter image description
-> here](https://images2.imagebam.com/63/dc/96/6cf8941342573262.png)
+> here](https://images2.imagebam.com/40/fe/d2/c0b87f1346101320.png)
 
 Për të parë se çfarë kërkesa plotëson programi jonë shikojeni përmbajtjen.
 
@@ -31,47 +27,60 @@ Për të parë se çfarë kërkesa plotëson programi jonë shikojeni përmbajtj
 Progami jonë mundëson të bëhen enkriptime dhe dektriptime sipas algoritmeve të ndryshme.
 Më poshtë do të shihni se qfarë komanda përmban programi jonë dhe sintaksa se si thirren ato përmes GitBash:<br>
 
-**Komanda Create-user** <br>
-Krijon një çift të publik/privat të RSA me emrat <name>.xml dhe <name>.pub.xml brenda direktoriumit të çelësave keys
+<br>**Komanda Create-user** <br>
+Krijon një çift të publik/privat të RSA me emrat <name>.xml dhe <name>.pub.xml brenda direktoriumit të çelësave keys, gjithashtu gjatë krijimit të shfrytëzuesit kërkohet edhe fjalëkalimi.
 
->     java ds create-user <name>
+>     java -jar ds.jar create-user <name>
 > ![enter image description
-> here](https://images2.imagebam.com/6d/57/a5/41334f1342573265.png)
+> here](https://images2.imagebam.com/80/11/07/8fa8c01346101309.png)
 
-**Komanda Delete-user** <br>
-I largon të gjithë çelësat ekzistues të shfrytëzuesit. 
+<br>**Komanda Delete-user** <br>
+I largon të gjithë çelësat ekzistues të shfrytëzuesit si dhe të gjitha të dhënat nga baza e të dhënave. 
 
->     java ds delete-user <name> 
+>     java -jar ds.jar delete-user <name> 
 > ![enter image description
-> here](https://images2.imagebam.com/60/ea/a3/7b91081342573268.png)
+> here](https://images2.imagebam.com/c0/6f/c0/e906a61346101311.png)
 
-**Komanda Export-key** <br>
+<br>**Komanda Login** <br>
+Teston çiftin shfrytëzues/fjalëkalim.
+  >     java -jar ds.jar login <name> 
+> ![enter image description
+> here](https://images2.imagebam.com/a5/7e/39/2cb21c1346101325.png)
+
+  
+  <br> **Komanda Status** <br>
+Jep informata rreth tokenit.
+  >     java -jar ds.jar status <token> 
+> ![enter image description
+> here](https://images2.imagebam.com/72/b5/28/aa38c01346101333.png)
+
+<br> **Komanda Export-key** <br>
 Eksporton çelësin publik ose privat të shfrytëzuesit nga direktoriumi i çelësave
 
->     java ds export-key <public|private> <name> [file] 
+>     java -jar ds.jar export-key <public|private> <name> [file] 
 > ![enter image description
-> here](https://images2.imagebam.com/d5/ca/f2/c251eb1342573271.png)
+> here](https://images2.imagebam.com/61/61/ae/bd49fc1346101314.png)
 
-**Komanda Import-key** <br>
+<br>**Komanda Import-key** <br>
 Importon çelësin publik ose privat të shfrytëzuesit nga shtegu i dhënë dhe e vendos në direktoriumin e çelësave. 
 
->     java ds import-key <name> <path>
+>     java -jar ds.jar import-key <name> <path>
 > ![enter image description
-> here](https://images2.imagebam.com/bc/13/ff/b5fe141342573274.png)
+> here](https://images2.imagebam.com/07/83/02/efc7ed1346101322.png)
 
-**Komanda Write-message** <br>
-E shkruan një mesazh të enkriptuar të dedikuar për një shfrytëzues. 
+<br>**Komanda Write-message** <br>
+E shkruan një mesazh të enkriptuar të dedikuar për një shfrytëzues, gjithashtu mund ta pranojë edhe opsionin --sender. Vlera sender është emri i shfrytëzuesit që i korrespondon tokenit token.
 
->     java ds write-message <name> <message> [file]
+>     java -jar ds.jar write-message <name> <message> [file]
 > ![enter image description
-> here](https://images2.imagebam.com/7e/f7/f1/c04b011342573278.png)
+> here](https://images2.imagebam.com/f3/62/9f/9795eb1346101341.png)
 
-**Komanda Read-message** <br>
-E dekripton dhe e shfaq në console mesazhin e enkriptuar. 
+<br>**Komanda Read-message** <br>
+E dekripton dhe e shfaq në console mesazhin e enkriptuar, gjithashtu nëse figuron pjesa e dërguesit/nënshkrimit në mesazh, atëherë do të tentohet verifikimi i atij nënshkrimi duke përdorur çelësin publik të dërguesit.
 
->     java ds read-message <encrypted-message>
+>     java -jar ds.jar read-message <encrypted-message>
 > ![enter image description
-> here](https://images2.imagebam.com/0c/88/d7/5760e81342573280.png)
+> here](https://images2.imagebam.com/b2/33/14/d0fcbf1346101332.png)
 
 <br>
 Gjithashtu programi jonë përmban edhe tri komanda tjera për enkriptime dhe dekriptime. 
@@ -84,58 +93,53 @@ Gjithashtu programi jonë përmban edhe tri komanda tjera për enkriptime dhe de
 Nënkomanda encode
 Enkodon tekstin <text> në pozitat alfabetike të shkronjave.
 
->     java ds numerical encode <text>
->      
+>     java -jar ds.jar numerical encode <text>
+> 
 > ![enter image description
-> here](https://images2.imagebam.com/49/78/b1/6b52d11338202361.jpg)
+> here](https://images2.imagebam.com/0b/1d/d1/aabba71346101327.png)
 
 Nënkomanda decode
 Dekodon vargun < code> nga shifrat në shkronjat përkatëse.
 
->     java ds numerical decode <code>
->     
+>     java -jar ds.jar numerical decode <code>
+> 
 > ![enter image description
-> here](https://images2.imagebam.com/07/09/7a/386c761338202356.jpg)
+> here](https://images2.imagebam.com/ae/5f/1d/0815951346101328.png)
 
 Gjithashtu te enkodimi kemi mundësi të zgjedhim opsionin "--separator" ku hapësirat në fjali të zëvendësohen me karakterin që dëshirojmë.
->     java ds numerical encode <text> --separator <char>
+
+>     java -jar ds.jar numerical encode <text> --separator <char>
 > ![enter image description
-> here](https://images2.imagebam.com/7b/d9/3b/c22dd31338202372.jpg)
+> here](https://images2.imagebam.com/f2/5b/f4/8d01c51346101330.png)
 
  
-**Komanda Case** <br>
+<br>**Komanda Case** <br>
 E konverton tekstin < text> në madhësinë e dhënë < case>, e cila mund të jetë: lower, upper, capitalize, inverse, alternating.
->     java ds case <case> <text>
+
+>     java -jar ds.jar case <case> <text>
 > ![enter image description
-> here](https://images2.imagebam.com/2e/c9/a6/0b9c001338202369.jpg)
-> ![enter image description
-> here](https://images2.imagebam.com/8b/14/56/5042261338202374.jpg)
-> ![enter image description
-> here](https://images2.imagebam.com/ba/6c/67/6da21e1338202348.jpg)                    
-> ![enter image description
-> here](https://images2.imagebam.com/78/12/e1/4de12f1338202366.jpg)
-> ![enter image description
-> here](https://images2.imagebam.com/d7/2d/05/3e3dc91338202344.jpg)
+> here](https://images2.imagebam.com/8f/27/72/1145381346101307.png)
 
 Nenkomanda sentence konverton secilën shkronjë të fjalisë e cila gjendet pas këtyre karaktereve si (.), (?), (/), (!).                     
 
 > ![enter image description
-> here](https://images2.imagebam.com/d0/e9/a9/b6793b1338203463.jpg)
+> here](https://images2.imagebam.com/d8/ec/8f/ea9b411346101303.png)
 
-**Komanda Vigenere** <br>
+<br>**Komanda Vigenere** <br>
 Vigenère Cipher është version më i avancuar i Kodit të Cezarit pasi që përdor më shumë se një zhvendosjesiçelës. Lexo më shumë [ketu](https://www.braingle.com/brainteasers/codes/vigenere.php).
 Perbehet nga dy nenkomanda, encryp dhe decrypt
  
 Nenkomanda encrypt 
 
->     ds vigenere encrypt <key> <plaintext> 
+>     java -jar ds.jar vigenere encrypt <key> <plaintext> 
 > ![enter image description
-> here](https://images2.imagebam.com/64/6b/e8/a732071338202363.jpg)
+> here](https://images2.imagebam.com/26/09/4c/aa23081346101335.png)
 
 Nenkomanda decrypt
->     ds vigenere encrypt <key> <cipertext> 
+
+>     java -jar ds.jar vigenere encrypt <key> <cipertext> 
 > ![enter image description
-> here](https://images2.imagebam.com/be/de/18/1de4641338202359.jpg)
+> here](https://images2.imagebam.com/e1/79/a1/a55ff81346101338.png)
 
 ## License & Copyright
 © Betim Thaçi, Çlirim Hodaj, Drinos Kukaj.  <br> University of Prishtina "Hasan Prishtina",  <br> Department: Computer Engineering.    <br>
