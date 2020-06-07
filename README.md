@@ -143,8 +143,10 @@ Nenkomanda decrypt
 > ![enter image description
 > here](https://images2.imagebam.com/e1/79/a1/a55ff81346101338.png)
 
+## Referencat
+[Referencat](Referencat.md) për secilen fazë.
+Gjithashtu një falenderim i veqant për [Edon Gashi](https://github.com/edongashi) që ishte i gatshëm për çdo paqartësi.
+
 ## License & Copyright
 © Betim Thaçi, Çlirim Hodaj, Drinos Kukaj.  <br> University of Prishtina "Hasan Prishtina",  <br> Department: Computer Engineering.    <br>
 Licensed under the [MIT License](LICENSE). 
-
-
