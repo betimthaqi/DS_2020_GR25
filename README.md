@@ -11,12 +11,14 @@ Qëllimi i këtij projekti është që të krijohet një aplikacion lehtë i ekz
  - Që programi jonë  të  ekzekutohet duhet që të shkarkoni atë përmes butonit download si dhe të gjithë fajllat të jenë në një follder të njëjtë.
  ![enter image description here](https://images2.imagebam.com/fe/63/60/cee4aa1346101316.png)
  - Programi jonë mund të ekzekutohet nga Command Line ose GitBash nese e keni te instaluar (qofse deshironi ta instaloni klikoni [ketu](https://git-scm.com/downloads)). Në do të tregojmë si ekzekutohet sipas GitBash, krejtësisht njëjtë shkon pocedura edhe me CommandLine.
- - Fillimisht duhet që në Git Bash të çasemi në folderin ku e kemi projektin, në shembullin më poshtë shihet qartë se si bëhet kjo.
+ -Pasi që projekti e metodat për implementimin e JWT (Json Web Token) janë krijuar përmes Maven Project është përdorur vegla Maven për agregimin (mbledhjen) e tërë programit me të gjitha libraritë (dependecies) në një fajll të vetëm (DS.jar).
+ - Fillimisht duhet që në Git Bash të çasemi në follderin ku e kemi të ruajtur fajllin "DS.jar", në shembullin e mëposhtëm shihet qartë se si bëhet kjo.
+ 
 
 > ![enter image description
 > here](https://images2.imagebam.com/7c/ed/3f/e888fa1346101318.png)
 
- - Pas kësaj - përmes komandave `java -jar` thirret programi DS.jar dhe pastaj argumentet që pasojnë sipas kerkesave, programi ekzekuton ndonjërën prej komandave specifike. Shih figurën më poshtë.
+ - Pas kësaj - përmes komandave `java -jar` thirret fajlli DS.jar (i cili përmban programin) dhe si rezultat i argumenteve që pasojnë sipas kerkesave, programi ekzekuton ndonjërën prej komandave specifike. Shih figurën më poshtë.
 
 > ![enter image description
 > here](https://images2.imagebam.com/40/fe/d2/c0b87f1346101320.png)
@@ -24,32 +26,32 @@ Qëllimi i këtij projekti është që të krijohet një aplikacion lehtë i ekz
 Për të parë se çfarë kërkesa plotëson programi jonë shikojeni përmbajtjen.
 
 ## Permbajtja
-Progami jonë mundëson të bëhen enkriptime dhe dektriptime sipas algoritmeve të ndryshme.
+Progami jonë mundëson të bëhen enkriptime dhe dekriptime sipas algoritmeve të ndryshme.
 Më poshtë do të shihni se qfarë komanda përmban programi jonë dhe sintaksa se si thirren ato përmes GitBash:<br>
 
 <br>**Komanda Create-user** <br>
-Krijon një çift të publik/privat të RSA me emrat <name>.xml dhe <name>.pub.xml brenda direktoriumit të çelësave keys, gjithashtu gjatë krijimit të shfrytëzuesit kërkohet edhe fjalëkalimi.
+Krijon një çift të publik/privat të RSA me emrat <name>.xml dhe <name>.pub.xml brenda direktoriumit të çelësave keys si dhe ruan shfrytëzuesin e caktuar (së bashku me fjalëkalimin e enkriptuar përmes hash funksioneve) në fajllin "login.txt".
 
 >     java -jar ds.jar create-user <name>
 > ![enter image description
 > here](https://images2.imagebam.com/80/11/07/8fa8c01346101309.png)
 
 <br>**Komanda Delete-user** <br>
-I largon të gjithë çelësat ekzistues të shfrytëzuesit si dhe të gjitha të dhënat nga baza e të dhënave. 
+I largon të gjithë çelësat ekzistues të shfrytëzuesit si dhe të gjitha të dhënat e shfrytëzuesit nga baza e të dhënave(përkatësisht nga fajlli login.txt). 
 
 >     java -jar ds.jar delete-user <name> 
 > ![enter image description
 > here](https://images2.imagebam.com/c0/6f/c0/e906a61346101311.png)
 
 <br>**Komanda Login** <br>
-Teston çiftin shfrytëzues/fjalëkalim.
+Teston çiftin shfrytëzues/fjalëkalim. Në rast suksesi, lëshohet tokeni i nënshkruar i cili shërben për autorizimin dhe autentikimin e shfrytëzuesit në aplikacion.
   >     java -jar ds.jar login <name> 
 > ![enter image description
 > here](https://images2.imagebam.com/a5/7e/39/2cb21c1346101325.png)
 
   
   <br> **Komanda Status** <br>
-Jep informata rreth tokenit.
+Jep informata rreth tokenit. 
   >     java -jar ds.jar status <token> 
 > ![enter image description
 > here](https://images2.imagebam.com/72/b5/28/aa38c01346101333.png)
