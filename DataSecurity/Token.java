@@ -18,7 +18,7 @@ public class Token {
 				.setAudience("Studentet")
 				.setIssuedAt(Date.from(now))
 				.setExpiration(Date.from(now.plus(20, ChronoUnit.MINUTES)))
-				.signWith(rsa.rsaprivat(emri))
+				.signWith(LetsEncrypt.rsaprivat(emri))
 				.compact();
 
 		return jwt;
@@ -36,7 +36,7 @@ public class Token {
 			String emri = tIpabesueshem.getBody().getSubject();
 
 			result = Jwts.parser()
-					.setSigningKey(rsa.rsapublik(emri))
+					.setSigningKey(LetsEncrypt.rsapublik(emri))
 					.parseClaimsJws(jwt);
 			
 			
@@ -63,7 +63,7 @@ public class Token {
 			String emri = tIpabesueshem.getBody().getSubject(); //sherben per nenshkrim (e gjen qelsin e rsa ne baze te emrit)
 
 			result = Jwts.parser()
-					.setSigningKey(rsa.rsapublik(emri))
+					.setSigningKey(LetsEncrypt.rsapublik(emri))
 					.parseClaimsJws(jwt);
 			sender = result.getBody().getSubject();
 			
